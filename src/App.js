@@ -9,11 +9,13 @@ import CircularProgress from "@mui/material/CircularProgress";
 import { Pagination } from "@mui/material";
 
 export default function App() {
-  // List of queries and their resppective useState
+  
+  const[query,setQuery]=useState('')
 
   // Landing page
   const frontPageDataApi =
-    "https://hn.algolia.com/api/v1/search?tags=front_page";
+    `https://hn.algolia.com/api/v1/search?tags=front_page&query=${query}`;
+
   const [apiDataLanding, setApiDataLanding] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -29,20 +31,19 @@ export default function App() {
   // Landing page fetch
   useEffect(() => {
     fetchData(frontPageDataApi, setApiDataLanding);
-  }, []);
+  }, [frontPageDataApi]);
   /*  14568468
   http://hn.algolia.com/api/v1/items/:id */
 
   /*   http://hn.algolia.com/api/v1/search?query=foo&tags=story */
 
-  console.log(apiDataLanding);
+  //console.log(apiDataLanding);
 
   return (
     <>
-      <Navbar />
-
+      <Navbar query={query} setQuery={setQuery}/>
       {loading ? (
-        <p>
+        <>
           <div>
             {apiDataLanding.hits.map((e) => {
               return (
@@ -55,7 +56,7 @@ export default function App() {
             })}
           </div>
           <Pagination count={10} color="primary" />
-        </p>
+        </>
       ) : (
         <div className="loading">
           <CircularProgress />
