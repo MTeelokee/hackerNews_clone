@@ -13,7 +13,7 @@ export default function App() {
 
   // Landing page
   const frontPageDataApi =
-    "http://hn.algolia.com/api/v1/search?tags=front_page";
+    "https://hn.algolia.com/api/v1/search?tags=front_page";
   const [apiDataLanding, setApiDataLanding] = useState([]);
   const [loading, setLoading] = useState(false);
 
