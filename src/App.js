@@ -12,6 +12,13 @@ export default function App() {
   
   const[query,setQuery]=useState('')
 
+
+
+
+
+
+
+
   // Landing page
   const frontPageDataApi =
     `https://hn.algolia.com/api/v1/search?tags=front_page&query=${query}`;
@@ -32,12 +39,11 @@ export default function App() {
   useEffect(() => {
     fetchData(frontPageDataApi, setApiDataLanding);
   }, [frontPageDataApi]);
-  /*  14568468
-  http://hn.algolia.com/api/v1/items/:id */
-
-  /*   http://hn.algolia.com/api/v1/search?query=foo&tags=story */
-
-  //console.log(apiDataLanding);
+ 
+  const handleChange = (e, p) => {
+    console.log(e,p)
+    setQuery(`&page=${p}`);
+  };
 
   return (
     <>
@@ -55,7 +61,7 @@ export default function App() {
               );
             })}
           </div>
-          <Pagination count={10} color="primary" />
+          <Pagination count={3} color="primary" onChange={handleChange}/>
         </>
       ) : (
         <div className="loading">
@@ -65,3 +71,4 @@ export default function App() {
     </>
   );
 }
+

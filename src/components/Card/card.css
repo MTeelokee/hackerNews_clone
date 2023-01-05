@@ -1,10 +1,9 @@
 .content{
     margin: 1em;
+    display: flex;
 }
 
-.paper{
-    width: 300px;
-}
+
 
 .title{
     font-weight: 700;
